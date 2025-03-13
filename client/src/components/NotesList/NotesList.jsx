@@ -141,7 +141,7 @@ const NotesList = () => {
       </div>
       <div className="notes">
         {showTempNote && (
-          <div className="note active">
+          <div className="note active" onClick={() => setShowNotesList(false)}>
             <div className="title">Untitled</div>
             <div className="categories">
               <div className="category">
