@@ -23,6 +23,7 @@ import { AuthContext } from "../context/AuthContext.js";
 import { toast } from "react-toastify";
 
 import heroMedia from "../assets/hero-media.mp4";
+import poster from "../assets/hero-img.png";
 import API_BASE_URL from "../config.js";
 
 const Login = () => {
@@ -127,7 +128,7 @@ const Login = () => {
             <p>Learning made easier.</p>
           </div>
           <div className="hero-media">
-            <video muted preload="auto" playsInline loop>
+            <video muted preload="auto" playsInline loop poster={poster}>
               <source src={heroMedia} type="video/mp4" />
             </video>
           </div>
