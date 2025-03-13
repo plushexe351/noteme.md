@@ -33,7 +33,7 @@ import "prismjs/components/prism-python";
 import { marked } from "marked";
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const geminiApiKey = process.env.REACT_APP_GEMINI_APi_KEY;
+const geminiApiKey = process.env.REACT_APP_GEMINI_API_KEY;
 const WritingTools = () => {
   const { setWritingToolsMode } = useContext(AuthContext);
   const [messageMood, setMessageMood] = useState("");
