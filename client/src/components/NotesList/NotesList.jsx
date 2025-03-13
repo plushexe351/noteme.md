@@ -78,6 +78,7 @@ const NotesList = () => {
     (note) => {
       setCurrentNote(note);
       setShowTempNote(false);
+      setShowNotesList(false);
     },
     [setCurrentNote, setShowTempNote]
   );
@@ -184,6 +185,7 @@ const NotesList = () => {
                   onChange={(e) =>
                     handleCategoryChange(note._id, e.target.value)
                   }
+                  onClick={(e) => e.stopPropagation()}
                 >
                   <option value="">All Notes</option>
                   {categories.map((cat) => (

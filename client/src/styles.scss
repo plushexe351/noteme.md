@@ -316,7 +316,7 @@ $dark-text-color: #f0f0f0;
   display: flex;
   gap: 0.5rem;
   justify-content: start;
-  align-items: start;
+  align-items: center;
   overflow: auto;
   flex-direction: column;
 
@@ -341,7 +341,7 @@ $dark-text-color: #f0f0f0;
     all: unset;
     border: none;
     box-shadow: none;
-    width: 80px;
+    // width: 80px;
   }
   .actions-bar {
     width: 100%;
@@ -389,8 +389,8 @@ $dark-text-color: #f0f0f0;
       position: relative;
       color: var(--additional-color);
       border-radius: 0.4rem;
-      padding: 0.5rem 2rem;
-      width: 100%;
+      padding: 0.5rem 1rem;
+      // width: 100%;
       cursor: pointer;
       &::before {
         content: "";
@@ -416,6 +416,9 @@ $dark-text-color: #f0f0f0;
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
+          option {
+            font-size: 1rem;
+          }
         }
         display: flex;
         justify-content: start;
@@ -447,7 +450,7 @@ $dark-text-color: #f0f0f0;
     padding-block: 0rem 1rem;
     display: flex;
     gap: 1rem;
-
+    overflow: auto;
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #6a528f48;
