@@ -16,7 +16,12 @@ const PORT = process.env.PORT || 3001;
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://noteme-md.vercel.app",
+    credentials: true,
+  })
+);
 app.use(bodyParser.json());
 
 connectDB();
