@@ -1,0 +1,102 @@
+.Settings {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.463);
+
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .btn--close-settings {
+    border-radius: 1rem;
+
+    border: none;
+    padding: 0.6rem;
+    background-color: rgb(46, 0, 46);
+    color: white;
+    cursor: pointer;
+  }
+  .settings-container {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 2rem;
+    max-width: 90vw;
+    width: 450px;
+    max-height: 90vh;
+    animation: fade-in 0.2s ease 1;
+
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding-bottom: 0.5rem;
+      h3 {
+        color: rgb(46, 0, 46);
+      }
+      .btn--close-settings {
+        background-color: rgb(46, 0, 46);
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        .icon {
+          width: 0.5rem;
+          height: 0.5rem;
+        }
+      }
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+      padding: 1rem;
+      display: flex;
+      justify-content: start;
+      gap: 0.5rem;
+      align-items: center;
+      flex-direction: column;
+      .profile-image {
+        img {
+          border-radius: 50%;
+          height: 50px;
+          width: 50px;
+          outline: 1px solid rgb(46, 0, 46);
+          outline-offset: 2px;
+        }
+      }
+      .icon {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: 0.5rem;
+        color: gray;
+      }
+      > * {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .username {
+        color: darkslateblue;
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+    }
+    .btn--log-out {
+      width: 100%;
+      background-color: rgb(46, 0, 46);
+      color: white;
+      text-align: center;
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+  }
+}

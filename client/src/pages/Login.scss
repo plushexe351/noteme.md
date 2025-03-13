@@ -1,0 +1,303 @@
+@mixin smallDevice {
+  @media screen and (max-width: 950px) {
+    @content;
+  }
+}
+@mixin smallerDevice {
+  @media screen and (max-width: 650px) {
+    @content;
+  }
+}
+@mixin mediumDevice {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
+.Login {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  * {
+    transition: 0.4s ease;
+  }
+  .navbar {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.512);
+    -webkit-backdrop-filter: blur(2rem);
+    backdrop-filter: blur(2rem);
+    border-bottom: 1px solid rgba(211, 211, 211, 0.15);
+    justify-content: space-around;
+    align-items: center;
+    gap: 1rem;
+    @include smallDevice() {
+      flex-direction: column;
+    }
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      @include smallDevice() {
+        flex-direction: column;
+      }
+    }
+    .nav-items {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      align-items: center;
+      * {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+
+  main {
+    padding: 1rem;
+    background-color: black;
+    flex: 1;
+    width: 100%;
+    color: white;
+    width: 100%;
+    height: 100%;
+    background-color: #010101;
+    background-image: radial-gradient(
+      rgba(255, 255, 255, 0.171) 1px,
+      transparent 0
+    );
+    background-size: 30px 30px;
+    background-position: -5px -5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+      @include smallDevice() {
+        flex-direction: column;
+        align-items: start;
+      }
+      .hero-text {
+        p:first-of-type {
+          font-size: 3rem;
+          font-weight: 600;
+          @include mediumDevice {
+            font-size: 1.5rem;
+          }
+        }
+        h1 {
+          font-size: 5rem;
+          color: rgb(237, 219, 255);
+          @include mediumDevice {
+            font-size: 3rem;
+          }
+        }
+
+        p:last-of-type {
+          margin-top: 1rem;
+          font-weight: 500;
+        }
+      }
+      .hero-media {
+        width: 40vw;
+        min-width: 300px;
+
+        @include smallDevice {
+          width: 90vw;
+        }
+        video {
+          width: 100%;
+          border-radius: 0.4rem;
+          height: 100%;
+          outline: 4px solid rgb(29, 29, 29);
+        }
+      }
+    }
+    .infoCards {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      max-width: 1200px;
+      flex-wrap: wrap;
+      // box-shadow: 0 0 3em magenta;
+
+      .infoCard {
+        background-color: black;
+        border: 1px solid rgba(211, 211, 211, 0.2);
+        border-radius: 0.4rem;
+        padding: 2rem;
+        width: 350px;
+        height: 300px;
+        max-width: 90vw;
+
+        box-shadow: 0 0 5rem rgba(255, 0, 255, 0.161);
+        &:hover {
+          transform: scale(1.025);
+        }
+        .tools-list {
+          margin-top: 1rem;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          gap: 0.5rem;
+          font-weight: 600;
+          flex-wrap: wrap;
+
+          * {
+            font-size: 0.8rem;
+            border-radius: 3rem;
+            border: 1px solid rgba(211, 211, 211, 0.2);
+            padding: 0.2rem 0.7rem;
+            font-family: ui-sans-serif, system-ui, sans-serif,
+              "Apple Color Emoji", "Segoe UI Emoji", Segoe UI Symbol,
+              "Noto Color Emoji";
+          }
+        }
+        .icon {
+          height: 2rem;
+          width: 2rem;
+          margin-bottom: 1rem;
+          &.customise {
+            color: blueviolet;
+          }
+
+          &.tools {
+            color: lightgoldenrodyellow;
+          }
+
+          &.search {
+            color: magenta;
+          }
+          &.quiz {
+            color: lightgreen;
+          }
+          &.import {
+            color: lightsalmon;
+          }
+          &.translate {
+            color: aqua;
+          }
+        }
+        h1 {
+          font-size: 1rem;
+          margin-bottom: 1.5rem;
+        }
+        p {
+          font-size: 1rem;
+          line-height: 1.6;
+          font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+            "Segoe UI Emoji", Segoe UI Symbol, "Noto Color Emoji";
+        }
+      }
+    }
+    .call-to-action {
+      font-size: 1.2rem;
+      padding: 0.7rem 1rem;
+      display: flex;
+      gap: 0.3rem;
+      font-weight: 600;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0.4rem;
+      background-color: black;
+      border: 1px solid rgba(211, 211, 211, 0.2);
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.025);
+      }
+    }
+  }
+
+  #app-title {
+    font-size: 1.3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    font-weight: 700;
+    color: white;
+    span {
+      font-style: normal;
+      color: magenta;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .icon {
+        height: 1.5rem;
+        width: 1.5rem;
+      }
+    }
+    p {
+      font-style: normal;
+      font-weight: normal;
+      text-align: center;
+      font-size: 1rem;
+      // min-width: 100%;
+    }
+  }
+  .signin {
+    max-width: 320px;
+    display: flex;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    gap: 0.75rem;
+    color: #000000;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .signin:hover {
+    transform: scale(1.025);
+  }
+
+  .signin:active {
+    transform: scale(0.975);
+  }
+
+  button svg {
+    height: 24px;
+    width: auto;
+  }
+
+  footer {
+    width: 100%;
+    border-top: 1px solid rgba(211, 211, 211, 0.15);
+    color: rgba(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    .social-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}
