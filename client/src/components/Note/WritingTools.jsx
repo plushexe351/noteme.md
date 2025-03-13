@@ -142,12 +142,8 @@ const WritingTools = () => {
         console.log(text);
         setResult(text);
         setResultGlobal(text);
-        alert(
-          `Your prompt was ${GEMINI_EVALUATION_INSTRUCTIONS_PROMPT} and msg type was ${messageType}`
-        );
         setLoading(false);
       }
-      // return text;
     } catch (error) {
       setLoading(false);
       console.error(error);
