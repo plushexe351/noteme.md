@@ -58,6 +58,7 @@ const Sidebar = () => {
     setCurrentNote(null);
     setCurrentCategory("All Notes");
     setViewMode("edit");
+    setShowSidebar(false);
   };
 
   const handleAddCategoryClick = (e) => {
