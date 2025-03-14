@@ -74,6 +74,13 @@ export const AuthContextProvider = ({ children }) => {
     }
   }, [currentUser]);
 
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     setNotes([]); // Clear previous user's notes
+  //     setCategories([]);
+  //   }
+  // }, [currentUser]); // Run when `user` changes
+
   return (
     <AuthContext.Provider
       value={{

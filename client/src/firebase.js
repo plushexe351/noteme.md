@@ -18,34 +18,4 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const analytics = getAnalytics(app);
 
-// const signInWithGoogle = (setUser) => {
-//   signInWithPopup(auth, provider)
-//     .then((result) => {
-//       const user = result.user;
-//       setUser({
-//         uid: user.uid,
-//         name: user.displayName,
-//         email: user.email,
-//       });
-
-//       // Store UID in the database
-//       fetch("/api/login", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ uid: user.uid }),
-//       })
-//         .then((res) => res.json())
-//         .then((data) => {
-//           console.log(data);
-//           // Redirect to home or handle navigation
-//         });
-//     })
-//     .catch((error) => {
-//       console.error(error);
-//       throw error;
-//     });
-// };
-
 export { auth, provider };

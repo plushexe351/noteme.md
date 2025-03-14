@@ -28,8 +28,17 @@ import API_BASE_URL from "../config.js";
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setCurrentUser, setContent, setCurrentNote, setShowTempNote } =
-    useContext(AuthContext);
+  const {
+    setCurrentUser,
+    setContent,
+    setCurrentNote,
+    setShowTempNote,
+    setNotes,
+    setCategories,
+  } = useContext(AuthContext);
+
+  setNotes([]);
+  setCategories([]);
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, provider)
