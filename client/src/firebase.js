@@ -4,13 +4,13 @@ import { getAnalytics } from "firebase/analytics";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 const firebaseConfig = {
-  apiKey: "AIzaSyCOMK_r75945DmBu5qM2c4UfmbYJUze5EE",
-  authDomain: "noteme-81ada.firebaseapp.com",
-  projectId: "noteme-81ada",
-  storageBucket: "noteme-81ada.appspot.com",
-  messagingSenderId: "44152871301",
-  appId: "1:44152871301:web:60eafd2ecd270e89ab8cec",
-  measurementId: "G-7TQ67MQDT9",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 const app = initializeApp(firebaseConfig);
