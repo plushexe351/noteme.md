@@ -33,7 +33,7 @@ import { NotesContext } from "../../context/NotesContext";
 import { WritingToolsContext } from "../../context/WritingToolsContext";
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const geminiApiKey = process.env.REACT_APP_GEMINI_API_KEY;
-const AUTO_SAVE_DELAY = 2000;
+const AUTO_SAVE_DELAY = 1000;
 
 const Note = () => {
   const { currentUser } = useContext(AuthContext);
@@ -129,25 +129,21 @@ const Note = () => {
     }
   };
 
-  // const debouncedSaveNote = useCallback(debounce(saveNote, 1000), [content]);
-  // spams the api, server gets flooded on every keystoke.
-
-  const debouncedSaveNote = useCallback(
-    debounce(saveNote, AUTO_SAVE_DELAY), // configurable constant instead of hardcoding
-    []
-  );
+  const debouncedSaveNote = useCallback(debounce(saveNote, AUTO_SAVE_DELAY), [
+    content,
+  ]);
 
   useEffect(() => {
     debouncedSaveNote();
+    return () => debouncedSaveNote.cancel();
   }, [content]);
-  // auto saves after AUTO_SAVE_DELAY ms of inactivity.
-  // better to keep it >= 2s for slow typers, prevents API spam
 
   // manual save on ctrl+s
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.ctrlKey && e.key === "s") {
         e.preventDefault();
+        console.log("save note called using key binding");
         saveNote();
         debouncedSaveNote.cancel();
       }

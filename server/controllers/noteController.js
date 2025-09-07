@@ -2,7 +2,7 @@ const Note = require("../models/Note");
 const asyncHandler = require("../middlewares/asyncHandler");
 
 // create a note
-const createNote = asyncHandler(async (req, res) => {
+const createNote = async (req, res) => {
   const { title, content, category, user } = req.body;
 
   if (!content?.trim()) {
@@ -20,10 +20,10 @@ const createNote = asyncHandler(async (req, res) => {
 
   await note.save();
   res.status(201).json({ success: true, note });
-});
+};
 
 // update a note
-const updateNote = asyncHandler(async (req, res) => {
+const updateNote = async (req, res) => {
   const { id } = req.params;
   const { title, content, category, status } = req.body;
 
@@ -44,10 +44,10 @@ const updateNote = asyncHandler(async (req, res) => {
   }
 
   res.status(200).json({ success: true, note });
-});
+};
 
 // update note status
-const updateNoteStatus = asyncHandler(async (req, res) => {
+const updateNoteStatus = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
 
@@ -62,10 +62,10 @@ const updateNoteStatus = asyncHandler(async (req, res) => {
   }
 
   res.status(200).json({ success: true, note });
-});
+};
 
 // update note category
-const updateNoteCategory = asyncHandler(async (req, res) => {
+const updateNoteCategory = async (req, res) => {
   const { id } = req.params;
   const { category } = req.body;
 
@@ -80,10 +80,10 @@ const updateNoteCategory = asyncHandler(async (req, res) => {
   }
 
   res.status(200).json({ success: true, note });
-});
+};
 
 // delete note
-const deleteNote = asyncHandler(async (req, res) => {
+const deleteNote = async (req, res) => {
   const { id } = req.params;
 
   const note = await Note.findByIdAndDelete(id);
@@ -93,15 +93,15 @@ const deleteNote = asyncHandler(async (req, res) => {
   }
 
   res.status(200).json({ success: true, message: "Note deleted successfully" });
-});
+};
 
 // get notes by user
-const getNotesByUser = asyncHandler(async (req, res) => {
+const getNotesByUser = async (req, res) => {
   const { userId } = req.query;
 
   const notes = await Note.find({ user: userId });
   res.status(200).json({ success: true, notes });
-});
+};
 
 module.exports = {
   createNote,

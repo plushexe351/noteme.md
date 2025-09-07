@@ -18,15 +18,15 @@ const app = express();
 
 // prod cors cfg
 
-app.use(
-  cors({
-    origin: "https://noteme-md.vercel.app",
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://noteme-md.vercel.app",
+//     credentials: true,
+//   })
+// );
 
 // dev cors cfg
-// app.use(cors());
+app.use(cors());
 
 app.use(bodyParser.json());
 

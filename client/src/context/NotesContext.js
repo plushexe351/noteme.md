@@ -19,7 +19,6 @@ export const NotesContextProvider = ({ children }) => {
 
   const handleSearchNote = (e) => {
     setSearchedNote(e.target.value);
-    console.log(searchedNote);
   };
 
   const fetchCategories = useCallback(async () => {
