@@ -1,129 +1,113 @@
 const Note = require("../models/Note");
+const asyncHandler = require("../middlewares/asyncHandler");
 
-const createNote = async (req, res) => {
-  try {
-    const { title, content, category, user } = req.body;
-    if (!content.trim()) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Content cannot be empty" });
-    }
+// create a note
+const createNote = asyncHandler(async (req, res) => {
+  const { title, content, category, user } = req.body;
 
-    const note = new Note({
-      title: title || "Untitled",
-      content,
-      category,
-      user,
-    });
-
-    await note.save();
-    res.status(201).json({ success: true, note });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error", error });
+  if (!content?.trim()) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Content cannot be empty" });
   }
-};
 
-const updateNote = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { title, content, category, status } = req.body;
+  const note = new Note({
+    title: title || "Untitled",
+    content,
+    category,
+    user,
+  });
 
-    if (!content.trim()) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Content cannot be empty" });
-    }
+  await note.save();
+  res.status(201).json({ success: true, note });
+});
 
-    const note = await Note.findByIdAndUpdate(
-      id,
-      { title, content, category, status, updatedAt: Date.now() },
-      { new: true }
-    );
+// update a note
+const updateNote = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { title, content, category, status } = req.body;
 
-    res.status(200).json({ success: true, note });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error", error });
+  if (!content?.trim()) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Content cannot be empty" });
   }
-};
 
-const updateNoteStatus = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { status } = req.body;
+  const note = await Note.findByIdAndUpdate(
+    id,
+    { title, content, category, status, updatedAt: Date.now() },
+    { new: true }
+  );
 
-    const note = await Note.findByIdAndUpdate(
-      id,
-      { status, updatedAt: Date.now() },
-      { new: true }
-    );
-    res.status(200).json({ success: true, note });
-  } catch (err) {
-    res.status(500).json({ success: false, message: "Server error", err });
+  if (!note) {
+    return res.status(404).json({ success: false, message: "Note not found" });
   }
-};
 
-const updateNoteCategory = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { category } = req.body;
+  res.status(200).json({ success: true, note });
+});
 
-    // Update the note's category
-    const updatedNote = await Note.findByIdAndUpdate(
-      id,
-      { category: category || null },
-      { new: true } // Return the updated note
-    );
+// update note status
+const updateNoteStatus = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
 
-    // Check if note was found and updated
-    if (!updatedNote) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Note not found" });
-    }
+  const note = await Note.findByIdAndUpdate(
+    id,
+    { status, updatedAt: Date.now() },
+    { new: true }
+  );
 
-    res.status(200).json({ success: true, note: updatedNote });
-  } catch (error) {
-    console.error("Error updating note category:", error); // Log the error
-    res.status(500).json({ success: false, message: "Server error", error });
+  if (!note) {
+    return res.status(404).json({ success: false, message: "Note not found" });
   }
-};
 
-const deleteNote = async (req, res) => {
-  try {
-    const { id } = req.params;
+  res.status(200).json({ success: true, note });
+});
 
-    const note = await Note.findByIdAndDelete(id);
+// update note category
+const updateNoteCategory = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { category } = req.body;
 
-    if (!note) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Note not found" });
-    }
+  const note = await Note.findByIdAndUpdate(
+    id,
+    { category: category || null },
+    { new: true }
+  );
 
-    res
-      .status(200)
-      .json({ success: true, message: "Note deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error" });
+  if (!note) {
+    return res.status(404).json({ success: false, message: "Note not found" });
   }
-};
 
-const getNotesByUser = async (req, res) => {
-  try {
-    const { userId } = req.query;
+  res.status(200).json({ success: true, note });
+});
 
-    const notes = await Note.find({ user: userId });
-    res.status(200).json({ success: true, notes });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error", error });
+// delete note
+const deleteNote = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const note = await Note.findByIdAndDelete(id);
+
+  if (!note) {
+    return res.status(404).json({ success: false, message: "Note not found" });
   }
-};
+
+  res.status(200).json({ success: true, message: "Note deleted successfully" });
+});
+
+// get notes by user
+const getNotesByUser = asyncHandler(async (req, res) => {
+  const { userId } = req.query;
+
+  const notes = await Note.find({ user: userId });
+  res.status(200).json({ success: true, notes });
+});
 
 module.exports = {
   createNote,
   updateNote,
   updateNoteStatus,
-  getNotesByUser,
-  deleteNote,
   updateNoteCategory,
+  deleteNote,
+  getNotesByUser,
 };

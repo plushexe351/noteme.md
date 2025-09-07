@@ -1,40 +1,59 @@
-const Category = require("../models/Category"); // Assume you have this model
+const Category = require("../models/Category");
+const asyncHandler = require("../middlewares/asyncHandler");
 
-const createCategory = async (req, res) => {
+// create a category
+const createCategory = asyncHandler(async (req, res) => {
   const { name, uid } = req.body;
 
-  try {
-    const category = new Category({ name, user: uid });
-    await category.save();
-    res
-      .status(201)
-      .json({ success: true, message: "Category created", category });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error" });
+  if (!name?.trim()) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Category name cannot be empty" });
   }
-};
 
-const getCategories = async (req, res) => {
+  const category = new Category({ name, user: uid });
+  await category.save();
+
+  res
+    .status(201)
+    .json({ success: true, message: "Category created", category });
+});
+
+// get categories for a user
+const getCategories = asyncHandler(async (req, res) => {
   const { uid } = req.query;
 
-  try {
-    const categories = await Category.find({ user: uid });
-    res.status(200).json({ success: true, categories });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error" });
-  }
-};
+  const categories = await Category.find({ user: uid });
+  res.status(200).json({ success: true, categories });
+});
 
-const deleteCategory = async (req, res) => {
+// delete a category
+const deleteCategory = asyncHandler(async (req, res) => {
   const { id } = req.params;
+  const { uid } = req.body; // make sure user sending the request is the owner
 
-  try {
-    await Category.findByIdAndDelete(id);
-    res.status(200).json({ success: true, message: "Category deleted" });
-  } catch (error) {
-    res.status(500).json({ success: false, message: "Server error" });
+  const category = await Category.findById(id);
+
+  if (!category) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Category not found" });
   }
-};
+
+  if (category.user.toString() !== uid) {
+    return res
+      .status(403)
+      .json({
+        success: false,
+        message: "Unauthorized to delete this category",
+      });
+  }
+
+  await category.deleteOne();
+  res
+    .status(200)
+    .json({ success: true, message: "Category deleted successfully" });
+});
 
 module.exports = {
   createCategory,
